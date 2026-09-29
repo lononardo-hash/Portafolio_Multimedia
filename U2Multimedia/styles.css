@@ -1,0 +1,915 @@
+/* ========================================
+   1. VARIABLES GLOBALES
+======================================== */
+
+:root {
+    --ink: #10100f;
+    --panel: #191916;
+    --gold: #d99e19;
+    --gold2: #f2bd38;
+    --cream: #f7f0df;
+    --muted: #aaa69a;
+    --line: rgba(242, 189, 56, 0.22);
+}
+
+
+/* ========================================
+   2. CONFIGURACIÓN GENERAL
+======================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background: var(--ink);
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+
+/* ========================================
+   3. FONDO DECORATIVO
+======================================== */
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: -35vh -15vw auto auto;
+
+    width: 72vw;
+    height: 72vw;
+    max-width: 1050px;
+    max-height: 1050px;
+
+    border: 1px solid rgba(217, 158, 25, 0.14);
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 0 22px rgba(217, 158, 25, 0.035),
+        0 0 0 70px rgba(217, 158, 25, 0.025),
+        0 0 0 130px rgba(217, 158, 25, 0.02);
+
+    pointer-events: none;
+    z-index: -1;
+}
+
+
+/* ========================================
+   4. CONTENEDOR PRINCIPAL
+======================================== */
+
+.wrap {
+    width: min(1160px, calc(100% - 48px));
+    margin: auto;
+}
+
+
+/* ========================================
+   5. NAVEGACIÓN
+======================================== */
+
+.nav {
+    height: 86px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+}
+
+.brand {
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+}
+
+.brand b {
+    color: var(--gold2);
+}
+
+.nav-tag {
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+
+/* ========================================
+   6. HERO
+======================================== */
+
+.hero {
+    min-height: calc(100vh - 86px);
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+
+    gap: 48px;
+    padding: 64px 0 78px;
+}
+
+.eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    color: var(--gold2);
+
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+
+.eyebrow::before {
+    content: "";
+
+    width: 32px;
+    height: 1px;
+
+    background: var(--gold2);
+}
+
+h1 {
+    margin: 25px 0;
+
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3.5rem, 7vw, 6.8rem);
+    font-weight: 600;
+
+    line-height: 0.92;
+    letter-spacing: -0.055em;
+}
+
+h1 em {
+    color: var(--gold2);
+    font-weight: 600;
+}
+
+.lead {
+    max-width: 470px;
+
+    color: #c2beb3;
+
+    font-size: 1.02rem;
+    line-height: 1.8;
+}
+
+
+/* ========================================
+   7. ACCIONES Y BOTONES
+======================================== */
+
+.actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 18px;
+    margin-top: 34px;
+}
+
+.cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+
+    padding: 16px 22px;
+
+    background: var(--gold2);
+    color: #15130d;
+
+    border: 1px solid var(--gold2);
+
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+
+    transition: 0.25s;
+}
+
+.cta:hover {
+    background: transparent;
+    color: var(--gold2);
+
+    transform: translateY(-3px);
+}
+
+.text-link {
+    padding-bottom: 5px;
+
+    color: #d5d0c4;
+    border-bottom: 1px solid #77736a;
+
+    font-size: 0.82rem;
+}
+
+.micro {
+    margin-top: 42px;
+
+    color: #77746c;
+
+    font-size: 0.68rem;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+}
+
+
+/* ========================================
+   8. SHOWCASE
+======================================== */
+
+.showcase {
+    position: relative;
+
+    min-height: 510px;
+
+    display: grid;
+    place-items: center;
+
+    perspective: 1400px;
+}
+
+
+/* Círculo interior */
+
+.halo {
+    position: absolute;
+
+    width: min(36vw, 440px);
+    aspect-ratio: 1;
+
+    border: 1px solid rgba(242, 189, 56, 0.45);
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 0 24px rgba(217, 158, 25, 0.04),
+        0 0 0 60px rgba(217, 158, 25, 0.025);
+}
+
+
+/* Órbita exterior */
+
+.orbit {
+    position: absolute;
+
+    width: min(43vw, 530px);
+    aspect-ratio: 1;
+
+    border: 1px dashed rgba(242, 189, 56, 0.18);
+    border-radius: 50%;
+
+    animation: spin 40s linear infinite;
+}
+
+.orbit::after {
+    content: "";
+
+    position: absolute;
+    left: 16%;
+    top: 13%;
+
+    width: 9px;
+    height: 9px;
+
+    background: var(--gold2);
+    border-radius: 50%;
+
+    box-shadow: 0 0 20px var(--gold2);
+}
+
+
+/* Animación de la órbita */
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* ========================================
+   9. TARJETA 3D
+======================================== */
+
+.card3d {
+    position: relative;
+
+    width: min(100%, 420px);
+    aspect-ratio: 1.75;
+
+    transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+
+    transition:
+        transform 0.8s cubic-bezier(0.2, 0.75, 0.2, 1);
+
+    cursor: pointer;
+
+    filter:
+        drop-shadow(0 35px 35px rgba(0, 0, 0, 0.55));
+
+    z-index: 2;
+    outline: none;
+}
+
+
+/* Tarjeta girada */
+
+.card3d.flipped {
+    transform: rotateY(180deg);
+}
+
+
+/* ========================================
+   10. CARAS DE LA TARJETA
+======================================== */
+
+.face {
+    position: absolute;
+    inset: 0;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    padding: 24px;
+
+    background: #090909;
+
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 4px;
+
+    overflow: hidden;
+
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+
+/* Cara frontal */
+
+.face.front {
+    z-index: 2;
+
+    background:
+        radial-gradient(
+            ellipse at 100% 0%,
+            #d99e19 0 18%,
+            transparent 18.5%
+        ),
+        #0b0b0b;
+}
+
+
+/* Cara trasera */
+
+.face.back {
+    transform: rotateY(180deg);
+
+    background:
+        linear-gradient(
+            135deg,
+            #d99e19,
+            #f2bd38
+        );
+
+    color: #111;
+}
+
+
+/* ========================================
+   11. CONTENIDO DE LA TARJETA
+======================================== */
+
+.card-brand {
+    color: #f2bd38;
+
+    font-size: clamp(9px, 1.2vw, 12px);
+    font-weight: 800;
+
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+}
+
+.card-main {
+    margin: 18px 0 12px;
+
+    font:
+        italic 700
+        clamp(26px, 4vw, 42px) / 0.95
+        'Playfair Display',
+        serif;
+}
+
+.card-sub {
+    color: #d8d2c3;
+
+    font-size: clamp(9px, 1.1vw, 12px);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+.card-line {
+    width: 44px;
+    height: 2px;
+
+    margin: 2px 0 13px;
+
+    background: #f2bd38;
+}
+
+
+/* Contenido de la parte trasera */
+
+.face.back .card-brand {
+    color: #111;
+}
+
+.face.back .card-sub {
+    color: #282317;
+}
+
+.face.back .card-main {
+    font-size: clamp(19px, 2.8vw, 30px);
+}
+
+
+/* Información de contacto */
+
+.card-contact {
+    font-size: clamp(9px, 1.15vw, 12px);
+    line-height: 1.8;
+    letter-spacing: 0.06em;
+}
+
+
+/* Sello */
+
+.card-stamp {
+    position: absolute;
+    right: 20px;
+    bottom: 15px;
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: 0.18em;
+
+    opacity: 0.7;
+}
+
+
+/* Indicador de interacción */
+
+.card-hint {
+    position: absolute;
+    bottom: 28px;
+
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    color: #aaa69a;
+
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.card-hint span {
+    color: var(--gold2);
+    font-size: 1rem;
+}
+
+
+/* ========================================
+   12. VISUALIZADOR 3D DEL HERO
+======================================== */
+
+.hero-viewer {
+    position: relative;
+
+    z-index: 2;
+
+    width: min(100%, 540px);
+    height: 360px;
+
+    overflow: visible;
+}
+
+.hero-viewer model-viewer {
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+
+    --poster-color: transparent;
+
+    background: transparent;
+
+    filter:
+        drop-shadow(0 35px 35px rgba(0, 0, 0, 0.55));
+}
+
+
+/* Indicador debajo del modelo */
+
+.showcase .card-hint {
+    bottom: 10px;
+
+    width: 100%;
+
+    justify-content: center;
+    text-align: center;
+}
+
+
+/* ========================================
+   13. SECCIONES
+======================================== */
+
+.section {
+    padding: 100px 0;
+
+    border-top:
+        1px solid rgba(255, 255, 255, 0.08);
+}
+
+.section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+
+    gap: 30px;
+    margin-bottom: 42px;
+}
+
+.kicker {
+    color: var(--gold2);
+
+    font-size: 0.7rem;
+    font-weight: 700;
+
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+
+.section h2 {
+    margin: 12px 0 0;
+
+    font:
+        600 clamp(2.3rem, 4vw, 4rem) / 1.05
+        'Playfair Display',
+        serif;
+
+    letter-spacing: -0.04em;
+}
+
+.section-head p {
+    max-width: 360px;
+
+    color: var(--muted);
+
+    font-size: 0.9rem;
+    line-height: 1.7;
+}
+
+
+/* ========================================
+   14. GRID Y TARJETAS
+======================================== */
+
+.grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 14px;
+}
+
+.tile {
+    min-height: 185px;
+
+    padding: 26px;
+
+    background: var(--panel);
+
+    border:
+        1px solid rgba(255, 255, 255, 0.08);
+}
+
+.tile .num {
+    color: var(--gold2);
+
+    font:
+        italic 1.5rem
+        'Playfair Display',
+        serif;
+}
+
+.tile h3 {
+    margin: 22px 0 10px;
+
+    font-size: 0.95rem;
+}
+
+.tile p {
+    margin: 0;
+
+    color: var(--muted);
+
+    font-size: 0.82rem;
+    line-height: 1.65;
+}
+
+
+/* ========================================
+   15. PANEL DEL MODELO
+======================================== */
+
+.model-panel {
+    display: grid;
+
+    grid-template-columns: 1fr 1.2fr;
+    align-items: center;
+
+    gap: 30px;
+    padding: 30px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #1c1b17,
+            #11110f
+        );
+
+    border: 1px solid var(--line);
+}
+
+.model-panel h3 {
+    margin: 12px 0;
+
+    font:
+        600 2rem
+        'Playfair Display',
+        serif;
+}
+
+.model-panel p {
+    color: var(--muted);
+
+    font-size: 0.88rem;
+    line-height: 1.7;
+}
+
+
+/* ========================================
+   16. SUBIR ARCHIVOS
+======================================== */
+
+.upload {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+
+    margin-top: 12px;
+    padding: 13px 16px;
+
+    color: var(--gold2);
+
+    border: 1px solid var(--gold2);
+
+    font-size: 0.75rem;
+    font-weight: 700;
+
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+
+    cursor: pointer;
+}
+
+.upload input {
+    display: none;
+}
+
+
+/* ========================================
+   17. VISUALIZADOR DEL MODELO
+======================================== */
+
+.viewer-wrap {
+    position: relative;
+
+    height: 360px;
+
+    display: grid;
+    place-items: center;
+
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(217, 158, 25, 0.13),
+            transparent 65%
+        );
+
+    overflow: hidden;
+}
+
+.viewer-wrap model-viewer {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+    min-height: 300px;
+
+    --poster-color: transparent;
+
+    background: transparent;
+}
+
+
+/* Placeholder */
+
+.viewer-placeholder {
+    width: 82%;
+    max-width: 350px;
+
+    aspect-ratio: 1.75;
+
+    transform: rotate(-8deg);
+
+    box-shadow:
+        0 24px 55px #0009;
+
+    border:
+        1px solid #ffffff22;
+}
+
+.viewer-placeholder img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+
+/* Nota inferior */
+
+.viewer-note {
+    position: absolute;
+
+    bottom: 10px;
+    left: 0;
+    right: 0;
+
+    color: #77746c;
+
+    text-align: center;
+
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+
+/* ========================================
+   18. FOOTER
+======================================== */
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+
+    gap: 20px;
+    padding: 30px 0 38px;
+
+    color: #77746c;
+
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.footer strong {
+    color: var(--gold2);
+}
+
+
+/* ========================================
+   19. RESPONSIVE - TABLET Y MÓVIL
+======================================== */
+
+@media (max-width: 800px) {
+
+    /* Hero */
+
+    .hero {
+        grid-template-columns: 1fr;
+
+        padding-top: 55px;
+
+        gap: 10px;
+    }
+
+    .showcase {
+        min-height: 440px;
+    }
+
+
+    /* Elementos decorativos */
+
+    .halo {
+        width: min(75vw, 400px);
+    }
+
+    .orbit {
+        width: min(88vw, 480px);
+    }
+
+
+    /* Modelo 3D del Hero */
+
+    .hero-viewer {
+        height: 310px;
+    }
+
+    .showcase .card-hint {
+        bottom: 8px;
+    }
+
+
+    /* Secciones */
+
+    .section-head {
+        display: block;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    /* Panel del modelo */
+
+    .model-panel {
+        grid-template-columns: 1fr;
+    }
+
+    .viewer-wrap {
+        height: 280px;
+    }
+
+
+    /* Navegación */
+
+    .nav-tag {
+        display: none;
+    }
+
+
+    /* Footer */
+
+    .footer {
+        flex-direction: column;
+    }
+
+
+    /* Contenedor */
+
+    .wrap {
+        width: min(100% - 32px, 1160px);
+    }
+}
+
+
+/* ========================================
+   20. ACCESIBILIDAD
+======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        scroll-behavior: auto !important;
+        transition: none !important;
+    }
+}
